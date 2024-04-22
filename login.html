@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Login - Black Ace Vehicle Dealership</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+    /* Add your custom styles for the login page here */
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2 class="text-center">Login </h2>
+  <form id="loginForm">
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" class="form-control" id="email" placeholder="Enter email" required>
+    </div>
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input type="password" class="form-control" id="password" placeholder="Enter password" required>
+    </div>
+    <button type="submit" class="btn btn-primary btn-block">Submit</button>
+  </form>
+  <div id="loginMessage" class="text-center" style="margin-top: 10px;"></div>
+</div>
+
+<script>
+  $(document).ready(function(){
+    $("#loginForm").submit(function(e){
+      e.preventDefault(); // Prevent form submission
+      var email = $("#email").val();
+      var password = $("#password").val();
+      
+      // For simplicity, check if email and password are not empty
+      if(email && password) {
+        $("#loginMessage").text("Logged in");
+      } else {
+        $("#loginMessage").text("Email and password are required");
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
