@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <style>
+    /* Add your custom styles for the dashboard here */
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Welcome to the Dashboard</h1>
+  <p>This is the dashboard screen for authenticated users.</p>
+  
+  <!-- Displaying all information in table format -->
+  <table class="table">
+    <thead>
+      <tr>
+        <th>User Information</th>
+        <th>Recent Orders</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <ul>
+            <li><strong>Email:</strong> mattkilp5@gmail.com</li>
+            <li><strong>Name:</strong> Matt Kilpatrick</li>
+            <li><strong>Role:</strong> Customer</li>
+          </ul>
+        </td>
+        <td>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Total Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Car Model X</td>
+                <td>2</td>
+                <td>$50,000</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Car Model Y</td>
+                <td>1</td>
+                <td>$30,000</td>
+              </tr>
+              <!-- Add more rows as needed -->
+            </tbody>
+          </table>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <a href="/logout" class="btn btn-danger">Logout</a>
+</div>
+
+</body>
+</html>
+
