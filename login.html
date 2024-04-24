@@ -9,11 +9,90 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <style>
     /* Add your custom styles for the login page here */
+    .user-info-box {
+      display: none;
+      background-color: #f9f9f9;
+      border: 5px solid #ff8c00;
+      border-radius: 5px;
+      padding: 10px;
+      margin-top: 20px;
+    }
+    .additional-info-box {
+      display: none;
+      background-color: #f9f9f9;
+      border: 5px solid #ff8c00;
+      border-radius: 5px;
+      padding: 10px;
+      margin-top: 20px;
+    }
+    .file-preview-box {
+      display: none;
+      background-color: #f9f9f9;
+      border: 5px solid #ff8c00;
+      border-radius: 5px;
+      padding: 10px;
+      margin-top: 20px;
+      white-space: pre-wrap;
+      overflow: auto;
+      max-height: 200px;
+    }
+    #fileInput {
+      display: none;
+    }
+    #uploadBtn {
+      margin-top: 10px;
+    }
+/* Adjusted styles for the photo above the right image */
+.photo-above-right {
+  width: 320px; /* Adjust the width as needed */
+  height: auto;
+  border: 5px solid #ff8c00;
+  border-radius: 5px;
+  position: absolute;
+  top: 10%;
+  right: 50%;
+  transform: translateX(281.3%);
+}
+.photo-above-left {
+  width: 300px; /* Adjust the width as needed */
+  height: auto;
+  border: 5px solid #ff8c00;
+  border-radius: 5px;
+  position: absolute;
+  top: 9%;
+  right: 50%;
+  transform: translateX(-200%);
+}
+.side-image {
+  width: 300px; /* Adjust the width as needed */
+  border: 5px solid #ff8c00;
+  border-radius: 5px;
+  height: auto;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.left-image {
+  left: 0;
+}
+
+.right-image {
+  right: 0;
+}
+.text-center h2 {
+    font-size: 1000px; /* Adjust the font size as needed */
+}
+
   </style>
 </head>
 <body>
 
 <div class="container">
+  <!-- Left Image -->
+  <img src="https://www.sixt.com/magazine/wp-content/uploads//sites/6/2022/04/Bugatti-Bolide-Hypercar-resize-1024x683.jpg" class="side-image left-image" alt="Left Image">
+  <!-- Photo above the left image -->
+  <img src="https://m.media-amazon.com/images/M/MV5BMzMwYWZkZjctZTU5Ny00MDNiLTlkMmYtNzkyODMwMGUxYzA2XkEyXkFqcGdeQXVyNzU1NzE3NTg@._V1_.jpg" class="photo-above-left" alt="Photo Above Left">
   <h2 class="text-center">Login </h2>
   <form id="loginForm">
     <div class="form-group">
@@ -24,27 +103,150 @@
       <label for="password">Password:</label>
       <input type="password" class="form-control" id="password" placeholder="Enter password" required>
     </div>
+    <div class="form-group">
+      <label for="loginType">Login As:</label>
+      <select class="form-control" id="loginType" required>
+        <option value="customer">Customer</option>
+        <option value="employee">Employee</option>
+      </select>
+    </div>
     <button type="submit" class="btn btn-primary btn-block">Submit</button>
   </form>
   <div id="loginMessage" class="text-center" style="margin-top: 10px;"></div>
+  
+  <!-- User information box -->
+  <div id="userInfoBox" class="user-info-box">
+    <h3>User Information: </h3>
+    <p><strong>Email:</strong> <span id="userInfoEmail"></span></p>
+    <p><strong>Name:</strong> <span id="userInfoName"></span></p>
+    <p><strong>Role:</strong> <span id="userInfoRole"></span></p>
+  </div>
+
+  <!-- Additional information box -->
+  <div id="additionalInfoBox" class="additional-info-box">
+    <h3>Additional Information: </h3>
+    <p><strong>ID:</strong> <span id="additionalInfoID"></span></p>
+    <p><strong>Age:</strong> <span id="additionalInfoAge"></span></p>
+    <p><strong>Phone Number:</strong> <span id="additionalInfoPhoneNumber"></span></p>
+    <p><strong>Address:</strong> <span id="additionalInfoAddress"></span></p>
+    <p><strong>Date of Birth:</strong> <span id="additionalInfoDOB"></span></p>
+  </div>
+
+  <!-- File upload -->
+  <input type="file" id="fileInput" accept=".csv">
+  <button id="uploadBtn" class="btn btn-primary">Upload CSV File</button>
+
+  <!-- File preview box -->
+  <h3 id="filePreviewHeader" style="display:none;">File Preview: </h3>
+  <div id="filePreviewBox" class="file-preview-box"></div>
+
+  <!-- Right Image -->
+<img src="https://cdn.motor1.com/images/mgl/ZnmO23/s1/future-cars-2023-2026.jpg" class="side-image right-image" alt="Right Image">
+<img src="https://www.sixt.com/magazine/wp-content/uploads//sites/6/2022/04/Bugatti-Bolide-Hypercar-resize-1024x683.jpg" class="side-image left-image" alt="Left Image">
+
+<!-- Photo above the right image -->
+<img src="https://imageio.forbes.com/specials-images/imageserve/6064c6802c761b99a89d1f21/0x0.jpg?format=jpg&crop=2375,1336,x0,y120,safe&height=600&width=1200&fit=bounds" class="photo-above-right" alt="Photo Above Right">
+
 </div>
 
 <script>
   $(document).ready(function(){
     $("#loginForm").submit(function(e){
-      e.preventDefault(); // Prevent form submission
-      var email = $("#email").val();
-      var password = $("#password").val();
-      
-      // For simplicity, check if email and password are not empty
-      if(email && password) {
-        $("#loginMessage").text("Logged in");
-      } else {
-        $("#loginMessage").text("Email and password are required");
-      }
-    });
-  });
-</script>
+        e.preventDefault(); // Prevent form submission
+        var email = $("#email").val();
+        var password = $("#password").val();
+        var loginType = $("#loginType").val();
 
+        // For simplicity, check if email and password are not empty
+        if(email && password) {
+            // Make an AJAX request to the server to authenticate the user
+            $.ajax({
+                url: "/login",
+                method: "POST",
+                data: {
+                    email: email,
+                    password: password,
+                    loginType: loginType
+                },
+                success: function(response) {
+                    // Handle the response from the server
+                    $("#loginMessage").text(response);
+                    if (response === "Login successful") {
+                        // Display user information box
+                        $("#userInfoEmail").text(email);
+                        $("#userInfoName").text("Daddy Machew"); // Example name
+                        $("#userInfoRole").text(loginType);
+                        $("#userInfoBox").slideDown();
+
+                        // Display additional information box
+                        $("#additionalInfoID").text("00512831"); // Example ID
+                        $("#additionalInfoAge").text("21"); // Example age
+                        $("#additionalInfoPhoneNumber").text("9-1-1"); // Example phone number
+                        $("#additionalInfoAddress").text("Your Mothers House SE"); // Example address
+                        $("#additionalInfoDOB").text("September 11, 2001"); // Example date of birth
+                        $("#additionalInfoBox").slideDown();
+                    }
+                },
+                error: function(xhr, status, error) {
+                    // Handle errors, if any
+                    console.error(error);
+                }
+            });
+        } else {
+            $("#loginMessage").text("Email and password are required");
+        }
+    });
+
+    // File upload handling
+    $("#uploadBtn").click(function() {
+        $("#fileInput").click();
+    });
+
+    $("#fileInput").change(function() {
+        var file = this.files[0];
+        if (file) {
+            var reader = new FileReader();
+            reader.readAsText(file, "UTF-8");
+            reader.onload = function (evt) {
+                var csvData = evt.target.result;
+                // Display CSV data in the preview box
+                var rows = csvData.split("\n");
+                var table = $("<table>").addClass("table");
+                rows.forEach(function(row) {
+                    var columns = row.split(",");
+                    var tr = $("<tr>");
+                    columns.forEach(function(column) {
+                        tr.append($("<td>").text(column));
+                    });
+                    table.append(tr);
+                });
+                $("#filePreviewBox").html(table);
+                $("#filePreviewHeader").text("File Preview: " + file.name);
+                $("#filePreviewHeader").slideDown();
+                $("#filePreviewBox").slideDown();
+            }
+            reader.onerror = function (evt) {
+                console.error("Error reading file");
+            }
+        }
+    });
+});
+
+</script>
+<footer class="container-fluid text-center">
+  <p>Online Store Copyright</p>  
+  <img src="https://github.com/lilmatthew2828/machewwork/blob/main/Black%20White%20Elegant%20Monogram%20Initial%20Name%20Logo.jpg?raw=true" alt="Flowers in Chania">
+  <form class="form-inline">Umbrella Storage Company
+    <style>
+      </style>
+    <input type="email" class="form-control" size="50" placeholder="Email Address">
+    <button type="button" class="btn btn-danger">Sign Up</button>
+  </form>
+</footer>
 </body>
 </html>
+
+
+
+
+
