@@ -44,54 +44,59 @@
       overflow: auto;
       max-height: 200px;
     }
+    .customer-invoice-box {
+      display: none;
+      background-color: #f9f9f9;
+      border: 5px solid #b7b1b1;
+      border-radius: 5px;
+      padding: 10px;
+      margin-top: 20px;
+    }
     #fileInput {
       display: none;
     }
     #uploadBtn {
       margin-top: 10px;
     }
-/* Adjusted styles for the photo above the right image */
-.photo-above-right {
-  width: 320px; /* Adjust the width as needed */
-  height: auto;
-  border: 5px solid #b7b1b1;
-  border-radius: 5px;
-  position: absolute;
-  top: 10%;
-  right: 50%;
-  transform: translateX(310%);
-}
-.photo-above-left {
-  width: 300px; /* Adjust the width as needed */
-  height: auto;
-  border: 5px solid #b7b1b1;
-  border-radius: 5px;
-  position: absolute;
-  top: 9%;
-  right: 50%;
-  transform: translateX(-250%);
-}
-.side-image {
-  width: 300px; /* Adjust the width as needed */
-  border: 5px solid #b7b1b1;
-  border-radius: 5px;
-  height: auto;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.left-image {
-  left: 0;
-}
-
-.right-image {
-  right: 0;
-}
-.text-center h2 {
-    font-size: 1000px; /* Adjust the font size as needed */
-}
-
+    /* Adjusted styles for the photo above the right image */
+    .photo-above-right {
+      width: 320px; /* Adjust the width as needed */
+      height: auto;
+      border: 5px solid #b7b1b1;
+      border-radius: 5px;
+      position: absolute;
+      top: 10%;
+      right: 50%;
+      transform: translateX(310%);
+    }
+    .photo-above-left {
+      width: 300px; /* Adjust the width as needed */
+      height: auto;
+      border: 5px solid #b7b1b1;
+      border-radius: 5px;
+      position: absolute;
+      top: 9%;
+      right: 50%;
+      transform: translateX(-250%);
+    }
+    .side-image {
+      width: 300px; /* Adjust the width as needed */
+      border: 5px solid #b7b1b1;
+      border-radius: 5px;
+      height: auto;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .left-image {
+      left: 0;
+    }
+    .right-image {
+      right: 0;
+    }
+    .text-center h2 {
+      font-size: 1000px; /* Adjust the font size as needed */
+    }
   </style>
 </head>
 <body>
@@ -122,7 +127,7 @@
   </form>
   <div id="loginMessage" class="text-center" style="margin-top: 10px;"></div>
   
-  <!-- User information box -->
+  <!-- the user information box -->
   <div id="userInfoBox" class="user-info-box">
     <h3>User Information: </h3>
     <p><strong>Email:</strong> <span id="userInfoEmail"></span></p>
@@ -130,9 +135,66 @@
     <p><strong>Role:</strong> <span id="userInfoRole"></span></p>
   </div>
 
-  <!-- Additional information box -->
+  <!-- the customer invoice box -->
+<div id="customerInvoiceBox" class="customer-invoice-box">
+  <h3>Customer Invoice: </h3> <!-- the header  -->
+  <p>Enter Invoice ID Number</p>   <!-- the place where they enter the id nmumber -->
+  <label for="Invoice">Invoice:</label>   
+  <input type="invoice" id="Invoice" placeholder="Enter invoice number">
+  <button onclick="submitInvoice()">Submit</button> <!-- the customer invoice box button to submit -->
+
+  <!--below is what prints the user information to the customer information box and sets the size: -->
+  <div id="invoiceInfo" style="margin-top: 20px;"></div>  
+</div>
+
+
+<script> // VALIDATING THE INVOICE NUMBER: 
+  function submitInvoice() {
+    var invoiceNumber = document.getElementById("Invoice").value;
+    // validating if the invoice number is 69539767
+    if (invoiceNumber === "69539767") 
+    {
+      // display the service price and its corresponding date
+      var invoiceInfo = "<p><strong>Service Price:</strong> $36000</p>";
+      invoiceInfo += "<p><strong>Service Date:</strong> 2024-04-16</p>";
+      $("#invoiceInfo").html(invoiceInfo);
+    } 
+    else if (invoiceNumber == '66785395')
+    {
+      var invoiceInfo = "<p><strong>Service Price:</strong> $23000</p>";
+      invoiceInfo += "<p><strong>Service Date:</strong> 2024-04-28</p>"; 
+      $("#invoiceInfo").html(invoiceInfo);  
+    }
+    else if (invoiceNumber == '23456743')
+    {
+      var invoiceInfo = "<p><strong>Service Price:</strong> $45000</p>";  
+      invoiceInfo += "<p><strong>Service Date:</strong> 2024-05-22</p>";
+      $("#invoiceInfo").html(invoiceInfo);  
+    } 
+    else if (invoiceNumber == '45683078')
+    {
+      var invoiceInfo = "<p><strong>Service Price:</strong> $56000</p>";  
+      invoiceInfo += "<p><strong>Service Date:</strong> 2023-05-22</p>";
+      $("#invoiceInfo").html(invoiceInfo);  
+    }
+    else if (invoiceNumber == '87654523')
+    {
+      var invoiceInfo = "<p><strong>Service Price:</strong> $87000</p>";  
+      invoiceInfo += "<p><strong>Service Date:</strong> 2024-03-23</p>";
+      $("#invoiceInfo").html(invoiceInfo);  
+    }  
+    else 
+    {
+      // print that the user entered number is not valid and they will need to trry again 
+      alert("Invalid invoice number. Please try again.");
+    }
+  }
+</script>
+<!--==========================================Everything below is displaying everything under the customer invoice box ==========================================--> 
+
+  <!--  the additional user information box -->
   <div id="additionalInfoBox" class="additional-info-box">
-    <h3>Additional Information: </h3>
+    <h3>Additional User Information: </h3>
     <p><strong>ID:</strong> <span id="additionalInfoID"></span></p>
     <p><strong>Age:</strong> <span id="additionalInfoAge"></span></p>
     <p><strong>Phone Number:</strong> <span id="additionalInfoPhoneNumber"></span></p>
@@ -140,21 +202,22 @@
     <p><strong>Date of Birth:</strong> <span id="additionalInfoDOB"></span></p>
   </div>
 
-  <!-- File upload -->
+  <!-- the reads the data upload -->
   <input type="file" id="fileInput" accept=".csv">
   <button id="uploadBtn" class="btn btn-primary">Upload CSV File</button>
 
-  <!-- File preview box -->
+  <!-- the box for the csv file box -->
   <h3 id="filePreviewHeader" style="display:none;">File Preview: </h3>
   <div id="filePreviewBox" class="file-preview-box"></div>
 
-  <!-- Right Image -->
-<img src="https://cdn.motor1.com/images/mgl/ZnmO23/s1/future-cars-2023-2026.jpg" class="side-image right-image" alt="Right Image">
-<img src="https://www.sixt.com/magazine/wp-content/uploads//sites/6/2022/04/Bugatti-Bolide-Hypercar-resize-1024x683.jpg" class="side-image left-image" alt="Left Image">
+  <!-- The images sources for the car pictures on the the login in screen -->
+  <img src="https://cdn.motor1.com/images/mgl/ZnmO23/s1/future-cars-2023-2026.jpg" class="side-image right-image" alt="Bottom Right Image"> <!--this is the bottom right image-->
 
-<!-- Photo above the right image -->
-<img src="https://imageio.forbes.com/specials-images/imageserve/6064c6802c761b99a89d1f21/0x0.jpg?format=jpg&crop=2375,1336,x0,y120,safe&height=600&width=1200&fit=bounds" class="photo-above-right" alt="Photo Above Right">
 
+  <img src="https://www.sixt.com/magazine/wp-content/uploads//sites/6/2022/04/Bugatti-Bolide-Hypercar-resize-1024x683.jpg" class="side-image left-image" alt=" Bottom Left Image"> <!--this is the top right image-->
+
+  <!-- Photo above the right image -->
+  <img src="https://imageio.forbes.com/specials-images/imageserve/6064c6802c761b99a89d1f21/0x0.jpg?format=jpg&crop=2375,1336,x0,y120,safe&height=600&width=1200&fit=bounds" class="photo-above-right" alt="Upper Right Photo"> 
 </div>
 
 <script>
@@ -193,10 +256,22 @@
                         $("#additionalInfoAddress").text("20 Beacons Way"); // Example address
                         $("#additionalInfoDOB").text("September 11, 2001"); // Example date of birth
                         $("#additionalInfoBox").slideDown();
+                        
+                        // validating that the invoice box if user is a customer 
+                        if (loginType === "customer")
+                        {
+                          $("#customerInvoiceBox").slideDown(); //if the user is the this will slide down and show to invoice info
+
+                        }
+                        else if (loginType == 'employee') 
+                        {
+                          $("#customerInvoiceBox").slideUp();
+
+                        }
                     }
                 },
                 error: function(xhr, status, error) {
-                    // Handle errors, if any
+                    // Handling errors, if any
                     console.error(error);
                 }
             });
@@ -205,7 +280,7 @@
         }
     });
 
-    // File upload handling
+    // .csv file uploading/handling
     $("#uploadBtn").click(function() {
         $("#fileInput").click();
     });
@@ -217,7 +292,7 @@
             reader.readAsText(file, "UTF-8");
             reader.onload = function (evt) {
                 var csvData = evt.target.result;
-                // Display CSV data in the preview box
+                // This shows .csv file in the  box 
                 var rows = csvData.split("\n");
                 var table = $("<table>").addClass("table");
                 rows.forEach(function(row) {
@@ -240,27 +315,142 @@
     });
 });
 
+</script> 
+<div class="container">
+  <h2 class="text-center">Database Work</h2>
+  <!-- Your login form goes here -->
+  <!-- Add the vehicle data display window here -->
+  <div id="vehicleDataWindow" style="display: none;">
+    <h3>Vehicle Data</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>VIN Number</th>
+          <th>Car Price</th>
+          <th>Make</th>
+          <th>Model</th>
+          <th>Year</th>
+        </tr>
+      </thead>
+      <tbody id="vehicleDataBody"></tbody>
+    </table>
+  </div>
+  
+
+
+
+
+
+
+</div>
+
+<script>
+  // Function to fetch the data from vehicle table of data and display it in its window
+  function fetchAndDisplayVehicleData() 
+  {
+    $.ajax({url: "/fetch_vehicle_data", method: "GET", success: function(response) 
+    {
+        // Check if vehicle data is available
+        if (response && response.length > 0)
+        {
+          var vehicleDataBody = $("#vehicleDataBody");
+          // Clear previous data
+          vehicleDataBody.empty();
+          // Populate table rows with vehicle data
+          response.forEach(function(vehicle) {
+            var row = "<tr>";
+            row += "<td>" + vehicle.vin_number + "</td>";
+            row += "<td>" + vehicle.car_price + "</td>";
+            row += "<td>" + vehicle.vehicle_make + "</td>";
+            row += "<td>" + vehicle.vehicle_model + "</td>";
+            row += "<td>" + vehicle.vehicle_year + "</td>";
+            row += "</tr>";
+            vehicleDataBody.append(row);
+          });
+          // Show the vehicle data window
+          $("#vehicleDataWindow").slideDown();
+        } else {
+          // No vehicle data available
+          console.log("No vehicle data available.");
+        }
+      },
+      error: function(xhr, status, error) {
+        // Error handling
+        console.error("Error fetching vehicle data:", error);
+      }
+    });
+  }
+  // Check if the user is signed in as an employee before showing the vehicle data window
+  $("#vehicleDataWindow").hide(); // Hide the window initially
+
+  $("#loginForm").submit(function(e){
+    e.preventDefault(); // Prevent form submission
+    var email = $("#email").val();
+    var password = $("#password").val();
+    var loginType = $("#loginType").val();
+
+    // For simplicity, check if email and password are not empty
+    if(email && password) {
+        // Make an AJAX request to the server to authenticate the user
+        $.ajax({
+            url: "/login",
+            method: "POST",
+            data: {
+                email: email,
+                password: password,
+                loginType: loginType
+            },
+            success: function(response) {
+                // Handle the response from the server
+                $("#loginMessage").text(response);
+                if (response === "Login successful") {
+                    // Display user information box
+                    $("#userInfoEmail").text(email);
+                    $("#userInfoName").text("Machew Kilpatrick"); // Example name
+                    $("#userInfoRole").text(loginType);
+                    $("#userInfoBox").slideDown();
+
+                    // Display additional information box
+                    $("#additionalInfoID").text("00512831"); // Example ID
+                    $("#additionalInfoAge").text("21"); // Example age
+                    $("#additionalInfoPhoneNumber").text("9-1-1"); // Example phone number
+                    $("#additionalInfoAddress").text("20 Beacons Way"); // Example address
+                    $("#additionalInfoDOB").text("September 11, 2001"); // Example date of birth
+                    $("#additionalInfoBox").slideDown();
+
+                    // Check if the user is signed in as an employee
+                    if (loginType === "employee") {
+                        // Call the function to fetch and display vehicle data
+                        fetchAndDisplayVehicleData();
+                    }
+                    else if(loginType == "customer")
+                    {
+                      $("#vehicleDataWindow").hide();
+                    }
+                }
+            },
+            error: function(xhr, status, error) {
+                // Handling errors, if any
+                console.error(error);
+            }
+        });
+    } else {
+        $("#loginMessage").text("Email and password are required");
+    }
+  });
+
 </script>
+
+
 <footer class="container-fluid text-center">
   <p>Online Store Copyright</p>  
   <img src="https://github.com/lilmatthew2828/machewwork/blob/main/Black%20White%20Elegant%20Monogram%20Initial%20Name%20Logo.jpeg?raw=true" alt="Flowers in Chania">
   <form class="form-inline">Umbrella Storage Company 
     <style>
       </style>
-    <input type="email" class="form-control" size="50" placeholder="Email Address">
+    <input type="email" class="form-control" size="30" placeholder="Email Address">
     <button type="button" class="btn btn-danger">Sign Up Here</button>
   </form>
 </footer>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
